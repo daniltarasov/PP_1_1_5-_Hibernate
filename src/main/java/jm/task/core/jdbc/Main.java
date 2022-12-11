@@ -15,8 +15,8 @@ public class Main {
         userDao.createUsersTable();
         userDao.saveUser("Bill", "Murrey", (byte) 72);
         userDao.saveUser("Jim", "Carrey", (byte) 60);
-        userDao.saveUser("Charlie", "Chaplin", (byte) 133);
-        userDao.saveUser("Leslie", "Nielsen", (byte) 96);
+        userDao.saveUser("Charlie", "Chaplin", (byte) 88);
+        userDao.saveUser("Leslie", "Nielsen", (byte) 84);
         userDao.getAllUsers().forEach(System.out::println);
         userDao.cleanUsersTable();
         userDao.dropUsersTable();
