@@ -1,29 +1,20 @@
 package jm.task.core.jdbc;
-
-import jm.task.core.jdbc.dao.UserDao;
-import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
-import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.Util;
-import org.hibernate.SessionFactory;
-
-import java.sql.SQLException;
-import java.util.List;
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args){
 
-        UserDao userDao = new UserDaoHibernateImpl();
-//        UserDao userDao = new UserDaoJDBCImpl();
-        userDao.createUsersTable();
-        userDao.saveUser("Bill", "Murrey", (byte) 72);
-        userDao.saveUser("Jim", "Carrey", (byte) 60);
-        userDao.saveUser("Charlie", "Chaplin", (byte) 88);
-        userDao.saveUser("Leslie", "Nielsen", (byte) 84);
-        userDao.getAllUsers().forEach(System.out::println);
-        userDao.cleanUsersTable();
-        userDao.dropUsersTable();
+        UserService userService = new UserServiceImpl();
+        userService.createUsersTable();
+        userService.saveUser("Bill", "Murrey", (byte) 72);
+        userService.saveUser("Jim", "Carrey", (byte) 60);
+        userService.saveUser("Charlie", "Chaplin", (byte) 88);
+        userService.saveUser("Leslie", "Nielsen", (byte) 84);
+        userService.getAllUsers().forEach(System.out::println);
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
 }
 

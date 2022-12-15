@@ -5,6 +5,7 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,6 @@ public class UserDaoHibernateImpl implements UserDao {
     public UserDaoHibernateImpl() {
 
     }
-
 
     @Override
     public void createUsersTable() {
@@ -87,15 +87,10 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            users = session.createQuery("from User", User.class).getResultList();
-            session.getTransaction().commit();
+            TypedQuery<User> typedQuery = session.createQuery("from User", User.class);
+            users = typedQuery.getResultList();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
         return users;
